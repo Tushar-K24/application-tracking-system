@@ -2,8 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const applicantAuthRouter = require("./routers/applicant/applicant.authRouter");
+
 const organizationAuthRouter = require("./routers/organization/organization.authRouter");
+const organizationQueryRouter = require("./routers/organization/organization.queryRouter");
+
+const applicantAuthRouter = require("./routers/applicant/applicant.authRouter");
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -27,8 +31,10 @@ mongoose
 
 mongoose.set("debug", true);
 
-app.use("/api/v1/applicant/auth", applicantAuthRouter);
 app.use("/api/v1/organization/auth", organizationAuthRouter);
+app.use("/api/v1/organization", organizationQueryRouter);
+
+app.use("/api/v1/applicant/auth", applicantAuthRouter);
 
 app.listen(3000, () => {
   console.log("server started at port 3000");
