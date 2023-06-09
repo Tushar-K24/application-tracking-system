@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const organizationAuthRouter = require("./routers/organization/organization.authRouter");
 const organizationQueryRouter = require("./routers/organization/organization.queryRouter");
+const organizationJobRouter = require("./routers/organization/organization.jobRouter");
 
 const applicantAuthRouter = require("./routers/applicant/applicant.authRouter");
 
@@ -33,6 +34,7 @@ mongoose.set("debug", true);
 
 app.use("/api/v1/organization/auth", organizationAuthRouter);
 app.use("/api/v1/organization", organizationQueryRouter);
+app.use("/api/v1/organization", organizationJobRouter);
 
 app.use("/api/v1/applicant/auth", applicantAuthRouter);
 

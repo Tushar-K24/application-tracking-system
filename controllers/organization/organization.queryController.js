@@ -7,7 +7,7 @@ const getOrganization = async (req, res) => {
     if (organization) {
       res.status(200).json({ message: "Organization found", organization });
     } else {
-      res.status(400).json({ message: "Organization does not exist" });
+      res.status(404).json({ message: "Organization does not exist" });
     }
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -17,13 +17,18 @@ const getOrganization = async (req, res) => {
 const updateOrganization = async (req, res) => {
   try {
     const { organizationID } = req.params;
-    await User.findOneAndUpdate(
+    const updatedOrganization = await User.findOneAndUpdate(
       { _id: organizationID },
       {
         $set: req.body,
+      },
+      {
+        new: true,
       }
     );
-    res.status(200).json({ message: "Details updated successfully" });
+    res
+      .status(200)
+      .json({ message: "Details updated successfully", updatedOrganization });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
