@@ -42,7 +42,7 @@ organizationSchema.pre("save", function (next) {
   });
 });
 
-organizationSchema.methods.comparePassword = (candidatePassword, cb) => {
+organizationSchema.methods.comparePassword = function (candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
     if (err) return cb(err);
     cb(null, isMatch);
