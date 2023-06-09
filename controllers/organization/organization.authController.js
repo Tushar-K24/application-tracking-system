@@ -1,4 +1,4 @@
-const User = require("../models/organizationModel");
+const User = require("../../models/organizationModel");
 const bcrypt = require("bcrypt");
 const signUp = async (req, res) => {
   try {
@@ -9,7 +9,9 @@ const signUp = async (req, res) => {
       password: password,
     });
     const user = await newUser.save();
-    res.status(201).json({ message: "User created successfully", user });
+    res
+      .status(201)
+      .json({ message: "User created successfully", user: user._id });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
