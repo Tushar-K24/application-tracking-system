@@ -28,7 +28,6 @@ mongoose
 mongoose.set("debug", true);
 
 app.use("/api/v1/applicant/auth", applicantAuthRouter);
-
 app.use("/api/v1/organization/auth", organizationAuthRouter);
 
 app.listen(3000, () => {

@@ -1,5 +1,5 @@
 const User = require("../../models/organizationModel");
-const bcrypt = require("bcrypt");
+
 const signUp = async (req, res) => {
   try {
     const { name, email, password } = req.body;

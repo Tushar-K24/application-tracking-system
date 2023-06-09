@@ -1,5 +1,4 @@
 const User = require("../../models/applicantModel");
-const bcrypt = require("bcrypt");
 
 const signUp = async (req, res) => {
   try {
