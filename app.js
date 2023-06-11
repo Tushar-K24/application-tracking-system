@@ -6,6 +6,7 @@ const cors = require("cors");
 const organizationAuthRouter = require("./routers/organization/organization.authRouter");
 const organizationQueryRouter = require("./routers/organization/organization.queryRouter");
 const organizationJobRouter = require("./routers/organization/organization.jobRouter");
+const organizationApplicantRouter = require("./routers/organization/organization.applicantRouter");
 
 const applicantAuthRouter = require("./routers/applicant/applicant.authRouter");
 const applicantQueryRouter = require("./routers/applicant/applicant.queryRouter");
@@ -41,6 +42,7 @@ app.use("/api/v1", jobRouter);
 app.use("/api/v1/organization/auth", organizationAuthRouter);
 app.use("/api/v1/organization", organizationQueryRouter);
 app.use("/api/v1/organization", organizationJobRouter);
+app.use("/api/v1/organization", organizationApplicantRouter);
 
 app.use("/api/v1/applicant/auth", applicantAuthRouter);
 app.use("/api/v1/applicant", applicantQueryRouter);
