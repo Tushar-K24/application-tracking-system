@@ -9,6 +9,9 @@ const organizationJobRouter = require("./routers/organization/organization.jobRo
 
 const applicantAuthRouter = require("./routers/applicant/applicant.authRouter");
 const applicantQueryRouter = require("./routers/applicant/applicant.queryRouter");
+const applicantJobRouter = require("./routers/applicant/applicant.jobRouter");
+
+const jobRouter = require("./routers/commons/jobRouter");
 
 const app = express();
 
@@ -33,12 +36,15 @@ mongoose
 
 mongoose.set("debug", true);
 
+app.use("/api/v1", jobRouter);
+
 app.use("/api/v1/organization/auth", organizationAuthRouter);
 app.use("/api/v1/organization", organizationQueryRouter);
 app.use("/api/v1/organization", organizationJobRouter);
 
 app.use("/api/v1/applicant/auth", applicantAuthRouter);
 app.use("/api/v1/applicant", applicantQueryRouter);
+app.use("/api/v1/applicant", applicantJobRouter);
 
 app.listen(3000, () => {
   console.log("server started at port 3000");

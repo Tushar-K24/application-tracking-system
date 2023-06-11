@@ -46,7 +46,7 @@ const searchJob = async (req, res) => {
   }
 };
 
-const getAllJobs = async (req, res) => {
+const getPostedJobs = async (req, res) => {
   try {
     // console.log(req.params);
     const { organizationID } = req.params;
@@ -96,4 +96,4 @@ const deleteJob = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
-module.exports = { createJob, searchJob, getAllJobs, updateJob, deleteJob };
+module.exports = { createJob, searchJob, getPostedJobs, updateJob, deleteJob };

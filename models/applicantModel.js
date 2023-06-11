@@ -27,8 +27,8 @@ const applicantSchema = new mongoose.Schema({
         ref: "Job",
       },
       status: {
-        type: String,
-        required: true,
+        type: String, //Applied/Ongoing(Round 1, Round 2, Round 3...)/Selected/Rejected/Withdrawn)
+        default: "applied",
       },
       review: [
         {
