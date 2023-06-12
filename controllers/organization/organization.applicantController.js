@@ -23,35 +23,27 @@ const updateApplicantStatus = async (req, res) => {
   try {
     const { applicantID, jobID } = req.params;
     const { status, review } = req.body;
+    const updateConfig = {
+      $set: {
+        "applications.$.status": status,
+      },
+    };
     if (review) {
-      await Applicant.findOneAndUpdate(
-        { _id: applicantID, "applications.jobID": jobID },
-        {
-          $set: {
-            "applications.$.status": status,
-          },
-          $push: {
-            "applications.$.review": review,
-          },
-        },
-        {
-          new: true,
-        }
-      );
-    } else {
-      await Applicant.findOneAndUpdate(
-        { _id: applicantID, "applications.jobID": jobID },
-        {
-          $set: {
-            "applications.$.status": status,
-          },
-        },
-        {
-          new: true,
-        }
-      );
+      updateConfig.$push = {
+        "applications.$.review": review,
+      };
     }
-    res.status(200).json({ message: "Status updated successfully" });
+    console.log(updateConfig);
+    const updatedUser = await Applicant.findOneAndUpdate(
+      { _id: applicantID, "applications.jobID": jobID },
+      updateConfig,
+      {
+        new: true,
+      }
+    );
+    res
+      .status(200)
+      .json({ message: "Status updated successfully", updatedUser });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
