@@ -58,13 +58,6 @@ applicantSchema.pre("save", function (next) {
   });
 });
 
-applicantSchema.methods.comparePassword = function (candidatePassword, cb) {
-  bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
-    if (err) return cb(err);
-    cb(null, isMatch);
-  });
-};
-
 const Applicant = mongoose.model("Applicant", applicantSchema);
 
 module.exports = Applicant;

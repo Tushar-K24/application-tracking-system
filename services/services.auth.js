@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+
 const signUp = async (User, name, email, password) => {
   const newUser = new User({
     name: name,
@@ -14,27 +16,31 @@ const signUp = async (User, name, email, password) => {
 const login = async (User, email, password) => {
   const user = await User.findOne({ email: email });
   if (user) {
-    user.comparePassword(password, (err, isMatch) => {
-      if (err) throw err;
-      if (isMatch) {
+    const response = await bcrypt
+      .compare(password, user.password)
+      .then((isEquals) => {
+        if (isEquals) {
+          return {
+            status: 200,
+            data: {
+              message: "Credentials matched successfully",
+              user: user._id,
+            },
+          };
+        }
         return {
-          status: 200,
+          status: 403,
           data: {
-            message: "Credentials matched successfully",
-            user: user._id,
+            message: "Invalid credentials",
           },
         };
-      }
-      return {
-        status: 403,
-        data: {
-          message: "Invalid credentials",
-        },
-      };
-    });
-  } else {
-    return { status: 401, data: { message: "User does not exist" } };
+      })
+      .catch((error) => {
+        throw error;
+      });
+    return response;
   }
+  return { status: 401, data: { message: "User does not exist" } };
 };
 
 module.exports = { signUp, login };
