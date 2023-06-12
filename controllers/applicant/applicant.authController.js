@@ -5,7 +5,6 @@ const signUp = async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const responseData = await authServices.signUp(User, name, email, password);
-    console.log(responseData);
     res.status(responseData.status).json(responseData.data);
   } catch (err) {
     res.status(400).json({ message: err.message });
