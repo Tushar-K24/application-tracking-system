@@ -39,8 +39,6 @@ const getPostedJobs = async (req, res) => {
       _id: organizationID,
     }).populate("postings");
     const jobs = organization.postings;
-    // const jobIDs = organization.postings;
-    // const jobs = await Job.find({ _id: jobIDs });
     res.status(200).json({ message: "Jobs found", jobs });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -85,7 +83,7 @@ const changeJobStatus = async (req, res) => {
     //     },
     //   }
     // );
-    if (updateJob) {
+    if (updatedJob) {
       res.status(200).json({ message: "Job status changed to closed" });
     } else {
       res.status(404).json({ message: "Job not found" });
