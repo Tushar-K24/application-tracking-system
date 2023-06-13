@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getAppliedJobs,
-  searchJob,
-  addJob,
-  changeStatus,
+  getAllAppliedJobs,
+  searchAppliedJob,
+  applyNewJob,
+  changeApplicationStatus,
 } = require("../../controllers/applicant/applicant.jobController");
 const {
   cookieJwtAuth,
@@ -16,26 +16,26 @@ router.get(
   "/:applicantID/jobs",
   cookieJwtAuth,
   authenticateApplicant,
-  getAppliedJobs
+  getAllAppliedJobs
 );
 
 router.get(
   "/:applicantID/jobs/:jobID",
   cookieJwtAuth,
   authenticateApplicant,
-  searchJob
+  searchAppliedJob
 );
 router.post(
   "/:applicantID/jobs/:jobID",
   cookieJwtAuth,
   authenticateApplicant,
-  addJob
+  applyNewJob
 );
 router.put(
   "/:applicantID/jobs/:jobID",
   cookieJwtAuth,
   authenticateApplicant,
-  changeStatus
+  changeApplicationStatus
 );
 
 module.exports = router;

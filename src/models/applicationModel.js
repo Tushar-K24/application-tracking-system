@@ -9,6 +9,15 @@ const applicationSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Applicant",
   },
+  status: {
+    type: String, //Applied/Ongoing(Round 1, Round 2, Round 3...)/Selected/Rejected/Withdrawn)
+    default: "applied",
+  },
+  review: [
+    {
+      type: String,
+    },
+  ],
 });
 
 const Application = mongoose.model("Application", applicationSchema);
