@@ -1,7 +1,7 @@
 const Organization = require("../../models/organizationModel");
 const Job = require("../../models/jobModel");
 
-const createJob = async (req, res) => {
+const createJobPosting = async (req, res) => {
   try {
     const { organizationID } = req.params;
     const organization = await Organization.findOne({ _id: organizationID });
@@ -32,27 +32,15 @@ const createJob = async (req, res) => {
   }
 };
 
-const searchJob = async (req, res) => {
-  try {
-    const { jobID } = req.params;
-    const job = await Job.findOne({ _id: jobID });
-    if (job) {
-      res.status(200).json({ message: "Job found", job });
-    } else {
-      res.status(404).json({ message: "Job does not exist" });
-    }
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-};
-
 const getPostedJobs = async (req, res) => {
   try {
-    // console.log(req.params);
     const { organizationID } = req.params;
-    const organization = await Organization.findOne({ _id: organizationID });
-    const jobIDs = organization.postings;
-    const jobs = await Job.find({ _id: jobIDs });
+    const organization = await Organization.findOne({
+      _id: organizationID,
+    }).populate("postings");
+    const jobs = organization.postings;
+    // const jobIDs = organization.postings;
+    // const jobs = await Job.find({ _id: jobIDs });
     res.status(200).json({ message: "Jobs found", jobs });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -79,21 +67,36 @@ const updateJob = async (req, res) => {
   }
 };
 
-const deleteJob = async (req, res) => {
+const changeJobStatus = async (req, res) => {
   try {
     const { jobID, organizationID } = req.params;
-    await Job.findOneAndDelete({ _id: jobID });
-    await Organization.findByIdAndUpdate(
-      { _id: organizationID },
+    const updatedJob = await Job.findOneAndUpdate(
+      { _id: jobID },
       {
-        $pull: {
-          postings: jobID,
-        },
-      }
+        $set: { status: "closed" },
+      },
+      { new: true }
     );
-    res.status(200).json({ message: "Organization deleted successfully" });
+    // await Organization.findByIdAndUpdate(
+    //   { _id: organizationID },
+    //   {
+    //     $pull: {
+    //       postings: jobID,
+    //     },
+    //   }
+    // );
+    if (updateJob) {
+      res.status(200).json({ message: "Job status changed to closed" });
+    } else {
+      res.status(404).json({ message: "Job not found" });
+    }
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
-module.exports = { createJob, searchJob, getPostedJobs, updateJob, deleteJob };
+module.exports = {
+  createJobPosting,
+  getPostedJobs,
+  updateJob,
+  changeJobStatus,
+};
