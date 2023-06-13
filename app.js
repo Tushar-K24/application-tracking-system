@@ -2,17 +2,18 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
-const organizationAuthRouter = require("./routers/organization/organization.authRouter");
-const organizationQueryRouter = require("./routers/organization/organization.queryRouter");
-const organizationJobRouter = require("./routers/organization/organization.jobRouter");
-const organizationApplicantRouter = require("./routers/organization/organization.applicantRouter");
+const organizationAuthRouter = require("./src/routers/organization/organization.authRouter");
+const organizationQueryRouter = require("./src/routers/organization/organization.queryRouter");
+const organizationJobRouter = require("./src/routers/organization/organization.jobRouter");
+const organizationApplicantRouter = require("./src/routers/organization/organization.applicantRouter");
 
-const applicantAuthRouter = require("./routers/applicant/applicant.authRouter");
-const applicantQueryRouter = require("./routers/applicant/applicant.queryRouter");
-const applicantJobRouter = require("./routers/applicant/applicant.jobRouter");
+const applicantAuthRouter = require("./src/routers/applicant/applicant.authRouter");
+const applicantQueryRouter = require("./src/routers/applicant/applicant.queryRouter");
+const applicantJobRouter = require("./src/routers/applicant/applicant.jobRouter");
 
-const jobRouter = require("./routers/commons/jobRouter");
+const jobRouter = require("./src/routers/commons/jobRouter");
 
 const app = express();
 
@@ -21,6 +22,7 @@ const corsOptions = {
   origin: ["http://localhost:3000"],
 };
 app.use(cors(corsOptions));
+app.use(cookieParser());
 
 mongoose
   .connect("mongodb://127.0.0.1:27017/atsDB", {
