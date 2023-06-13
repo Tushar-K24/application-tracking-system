@@ -1,25 +1,15 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const applicantSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const applicationSchema = new mongoose.Schema({
+  jobID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Job",
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
+  applicantID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Applicant",
   },
-  password: {
-    type: String,
-    required: true,
-  },
-  skills: [
-    {
-      type: String,
-    },
-  ],
 });
 
 applicantSchema.pre("save", function (next) {
@@ -41,6 +31,6 @@ applicantSchema.pre("save", function (next) {
   });
 });
 
-const Application = mongoose.model("Application", applicationSchema);
+const Applicant = mongoose.model("Applicant", applicantSchema);
 
-module.exports = Application;
+module.exports = Applicant;

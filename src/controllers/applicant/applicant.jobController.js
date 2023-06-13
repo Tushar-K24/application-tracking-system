@@ -21,7 +21,7 @@ const getAppliedJobs = async (req, res) => {
 
 const searchJob = async (req, res) => {
   try {
-    const { jobID } = req.params;
+    const { applicantID, jobID } = req.params;
     const job = await Job.findOne({
       _id: jobID,
     });

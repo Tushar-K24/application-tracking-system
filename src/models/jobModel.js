@@ -23,12 +23,6 @@ const jobSchema = new mongoose.Schema({
     type: String,
     default: "Open",
   },
-  applicants: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Applicant",
-    },
-  ],
 });
 
 const Job = mongoose.model("Job", jobSchema);
