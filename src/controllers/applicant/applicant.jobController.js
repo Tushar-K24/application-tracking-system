@@ -67,7 +67,7 @@ const changeApplicationStatus = async (req, res) => {
       if (updatedApplication) {
         res.status(200).json({ message: "Status changed successfully" });
       } else {
-        res.status(202).json({ message: "Application does not exist" });
+        res.status(404).json({ message: "Application does not exist" });
       }
     } else {
       res.status(202).json({ message: "No change occurred" });
