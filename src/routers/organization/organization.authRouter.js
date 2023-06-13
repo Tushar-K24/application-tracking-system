@@ -4,7 +4,7 @@ const {
   signUp,
   login,
 } = require("../../controllers/organization/organization.authController");
-const { validateEmail } = require("../../validators/authValidators");
+const { validateEmail } = require("../../validators/authValidator");
 
 //sign up
 router.post("/signup", validateEmail, signUp);
