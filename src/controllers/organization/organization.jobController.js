@@ -48,10 +48,15 @@ const getPostedJobs = async (req, res) => {
 const updateJob = async (req, res) => {
   try {
     const { jobID } = req.params;
+    const { role, description, skills } = req.body;
+    const updatedDetails = {};
+    if (role) updatedDetails.role = role;
+    if (description) updatedDetails.description = description;
+    if (skills) updatedDetails.skills = skills;
     const updatedJob = await Job.findOneAndUpdate(
       { _id: jobID },
       {
-        $set: req.body,
+        $set: updatedDetails,
       },
       {
         new: true,

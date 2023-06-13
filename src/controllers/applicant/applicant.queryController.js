@@ -17,10 +17,16 @@ const getApplicant = async (req, res) => {
 const updateApplicant = async (req, res) => {
   try {
     const { applicantID } = req.params;
+    const { name, email, password, skills } = req.body;
+    const updatedDetails = {};
+    if (name) updatedDetails.name = name;
+    if (email) updatedDetails.email = email;
+    if (password) updatedDetails.password = password;
+    if (skills) updatedDetails.skills = skills;
     const updatedUser = await User.findOneAndUpdate(
       { _id: applicantID },
       {
-        $set: req.body,
+        $set: updatedDetails,
       },
       {
         new: true,
