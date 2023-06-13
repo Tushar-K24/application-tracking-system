@@ -41,6 +41,6 @@ applicantSchema.pre("save", function (next) {
   });
 });
 
-const Application = mongoose.model("Application", applicationSchema);
+const Applicant = mongoose.model("Applicant", applicantSchema);
 
-module.exports = Application;
+module.exports = Applicant;

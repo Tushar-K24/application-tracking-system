@@ -1,19 +1,14 @@
 const User = require("../../models/applicantModel");
 const Job = require("../../models/jobModel");
+const Application = require("../../models/applicationModel");
 
 const getAppliedJobs = async (req, res) => {
   try {
     const { applicantID } = req.params;
-    const user = await User.findOne({ _id: applicantID }).populate(
-      "applications.jobID"
-    );
-    if (user) {
-      res
-        .status(200)
-        .json({ message: "User found", applications: user.applications });
-    } else {
-      res.status(401).json({ message: "User does not exist" });
-    }
+    const applications = await Application.find({
+      applicantID: applicantID,
+    }).populate("jobID");
+    res.status(200).json({ message: "User found", applications: applications });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -22,9 +17,10 @@ const getAppliedJobs = async (req, res) => {
 const searchJob = async (req, res) => {
   try {
     const { applicantID, jobID } = req.params;
-    const job = await Job.findOne({
-      _id: jobID,
-    });
+    const job = await Application.findOne({
+      applicantID: applicantID,
+      jobID: jobID,
+    }).populate("jobID");
     if (job) {
       res.status(200).json({ message: "job found", job });
     } else {
@@ -38,29 +34,9 @@ const searchJob = async (req, res) => {
 const addJob = async (req, res) => {
   try {
     const { applicantID, jobID } = req.params;
-    //add job to applications
-    await User.findOneAndUpdate(
-      { _id: applicantID },
-      {
-        $push: {
-          applications: {
-            jobID: jobID,
-          },
-        },
-      }
-    );
-
-    //add applicant to job applicants
-    await Job.findOneAndUpdate(
-      { _id: jobID },
-      {
-        $push: {
-          applicants: applicantID,
-        },
-      }
-    );
-
-    res.status(201).json({ message: "Job Added Successfully" });
+    const newApplication = res
+      .status(201)
+      .json({ message: "Job Added Successfully" });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
