@@ -5,11 +5,29 @@ const {
   updateOrganization,
   deleteOrganization,
 } = require("../../controllers/organization/organization.queryController");
-const { cookieJwtAuth } = require("../../middlewares/authMiddleware");
+const {
+  cookieJwtAuth,
+  authenticateOrganization,
+} = require("../../middlewares/authMiddleware");
 
 //organization queries
-router.get("/:organizationID", cookieJwtAuth, getOrganization);
-router.put("/:organizationID", cookieJwtAuth, updateOrganization);
-router.delete("/:organizationID", cookieJwtAuth, deleteOrganization);
+router.get(
+  "/:organizationID",
+  cookieJwtAuth,
+  authenticateOrganization,
+  getOrganization
+);
+router.put(
+  "/:organizationID",
+  cookieJwtAuth,
+  authenticateOrganization,
+  updateOrganization
+);
+router.delete(
+  "/:organizationID",
+  cookieJwtAuth,
+  authenticateOrganization,
+  deleteOrganization
+);
 
 module.exports = router;

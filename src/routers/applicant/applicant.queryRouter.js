@@ -5,11 +5,24 @@ const {
   updateApplicant,
   deleteApplicant,
 } = require("../../controllers/applicant/applicant.queryController");
-const { cookieJwtAuth } = require("../../middlewares/authMiddleware");
+const {
+  cookieJwtAuth,
+  authenticateApplicant,
+} = require("../../middlewares/authMiddleware");
 
 //organization queries
-router.get("/:applicantID", cookieJwtAuth, getApplicant);
-router.put("/:applicantID", cookieJwtAuth, updateApplicant);
-router.delete("/:applicantID", cookieJwtAuth, deleteApplicant);
+router.get("/:applicantID", cookieJwtAuth, authenticateApplicant, getApplicant);
+router.put(
+  "/:applicantID",
+  cookieJwtAuth,
+  authenticateApplicant,
+  updateApplicant
+);
+router.delete(
+  "/:applicantID",
+  cookieJwtAuth,
+  authenticateApplicant,
+  deleteApplicant
+);
 
 module.exports = router;

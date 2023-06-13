@@ -4,17 +4,22 @@ const {
   getApplicant,
   updateApplicantStatus,
 } = require("../../controllers/organization/organization.applicantController");
-const { cookieJwtAuth } = require("../../middlewares/authMiddleware");
+const {
+  cookieJwtAuth,
+  authenticateOrganization,
+} = require("../../middlewares/authMiddleware");
 
 //job queries
 router.get(
   "/:organizationID/jobs/:jobID/:applicantID",
   cookieJwtAuth,
+  authenticateOrganization,
   getApplicant
 );
 router.put(
   "/:organizationID/jobs/:jobID/:applicantID",
   cookieJwtAuth,
+  authenticateOrganization,
   updateApplicantStatus
 );
 
