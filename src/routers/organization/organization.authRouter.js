@@ -4,11 +4,12 @@ const {
   signUp,
   login,
 } = require("../../controllers/organization/organization.authController");
+const { validateEmail } = require("../../validators/authValidators");
 
 //sign up
-router.post("/signup", signUp);
+router.post("/signup", validateEmail, signUp);
 
 //log in
-router.post("/login", login);
+router.post("/login", validateEmail, login);
 
 module.exports = router;
