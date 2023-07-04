@@ -1,0 +1,10 @@
+.job-list h1 {
+  color: #253858;
+  display: inline;
+}
+
+.job-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

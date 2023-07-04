@@ -1,0 +1,32 @@
+/* .form-container {
+  display: flex;
+}
+
+.form-container div {
+  display: flex;
+  flex-direction: column;
+}
+*/
+
+.form-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.form-input {
+  margin: 1rem 0;
+}
+
+.job-form {
+  padding: 1rem 2rem;
+}
+
+.job-role-input {
+  flex-grow: 2;
+  margin-right: 5vw;
+}
+
+/* .job-description-input {
+  height: 10rem;
+} */

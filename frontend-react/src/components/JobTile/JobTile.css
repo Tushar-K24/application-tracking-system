@@ -1,0 +1,53 @@
+.custom-tile {
+  width: 72.5vw;
+  padding: 0.5rem 1rem;
+  border-top-left-radius: 0.2rem;
+  border-bottom-left-radius: 0.2rem;
+}
+
+.job-skills-list {
+  margin: 0.5rem;
+}
+
+.job-tile {
+  border-radius: 0.3rem;
+  padding: 0 1rem;
+  background-color: #b7cff8;
+  display: flex;
+  width: 98%;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  margin: 1rem 0;
+}
+
+.job-tile-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+}
+
+.job-tile-content h2 {
+  color: #253858;
+  margin: 0;
+  margin-top: 1rem;
+  padding-left: 0.5rem;
+}
+
+.job-tile-link {
+  color: #253858;
+  text-decoration: none;
+}
+
+.job-tile-icons {
+  display: flex;
+  align-items: center;
+}
+
+.job-tile-icons .icon {
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+.status-tile {
+  background-color: transparent;
+}

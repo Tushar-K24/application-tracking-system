@@ -1,0 +1,12 @@
+.navbar {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  position: sticky;
+  background-color: #228be6;
+}
+
+.nav-title {
+  padding: 0 2vh;
+  color: #fff;
+}

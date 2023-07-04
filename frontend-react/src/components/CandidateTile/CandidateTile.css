@@ -1,0 +1,51 @@
+#applicant-content-job {
+  margin-top: -0.1rem;
+}
+
+.mantine-Accordion-item {
+  background-color: #b7cff8;
+  border-radius: 5px;
+  margin: 1rem 0;
+}
+
+.mantine-Accordion-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.mantine-Accordion-control:hover {
+  background-color: #b7cff8;
+  border-radius: 5px;
+}
+
+.mantine-NativeSelect-wrapper {
+  height: 100%;
+}
+
+.applicant-content {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+}
+
+.applicant-content-btns-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: right;
+}
+
+.applicant-content-uni {
+  margin: 0.5rem 0;
+}
+
+.applicant-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.applicant-header p {
+  margin: 0;
+}
