@@ -1,0 +1,7 @@
+.display-card {
+  flex-grow: 2;
+  background-color: #b7cff8;
+  display: inline-block;
+  padding: 0 2rem;
+  font-family: Roboto, "Open Sans", "Helvetica Neue", sans-serif;
+}

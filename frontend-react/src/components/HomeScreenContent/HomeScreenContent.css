@@ -1,5 +1,7 @@
 .home-screen-content {
+  overflow-y: scroll;
   width: 100vw;
+  height: 86vh;
   padding: 1rem;
   background-color: rgb(222, 235, 255);
   padding: 1rem 4rem;

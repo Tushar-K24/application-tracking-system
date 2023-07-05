@@ -21,7 +21,8 @@ function Home() {
         />
         <Route
           path="dashboard"
-          element={<HomeScreenContent homeContent={<Dashboard />} />}        />
+          element={<HomeScreenContent homeContent={<Dashboard />} />}
+        />
         <Route
           path="jobs"
           element={<HomeScreenContent homeContent={<JobsList />} />}

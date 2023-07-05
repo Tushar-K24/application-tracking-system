@@ -1,0 +1,19 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dashboard-content {
+  display: flex;
+  gap: 10px;
+}
+
+.global-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chart-container {
+  flex-grow: 2;
+}
