@@ -108,14 +108,22 @@ function Dashboard() {
             }
           />
         </div>
-        <DonutChart
-          title="Applicant's Distribution"
-          jsonData={globalData.applications}
-        />
+        {globalData.applications ? (
+          <DonutChart
+            title="Applicant's Distribution"
+            jsonData={globalData.applications}
+          />
+        ) : (
+          <DisplayCard title="Applicant's Distribution" />
+        )}
       </div>
       <h2>Job Postings Distribution</h2>
       <div className="dashboard-content content-row-2">
-        <ColumnChart jsonData={globalData.applications} />
+        {globalData.applications ? (
+          <ColumnChart jsonData={globalData.applications} />
+        ) : (
+          <DisplayCard title="Distribution of Applicants" />
+        )}
       </div>
     </div>
   );
