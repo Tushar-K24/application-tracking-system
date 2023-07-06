@@ -1,20 +1,20 @@
 import React from "react";
 import { Chart } from "react-google-charts";
 
-export const data = [
-  ["Job", "Distribution of Applicants"],
-  ["Software Developer", 32],
-  ["Backend Developer", 12],
-  ["Frontend Developer", 25],
-  ["UI/UX Designer", 2],
-  ["Operations Manager", 10], // CSS-style declaration
-];
+function DonutChart({ title, jsonData }) {
+  const data = [["Job", "Distribution of Applicants"]];
 
-function DonutChart({ title }) {
+  jsonData.forEach((item) => {
+    const role = item._id.role;
+    const totalApplicants = item.totalApplicants;
+
+    data.push([role, totalApplicants]);
+  });
+
   const options = {
     title: title,
     titleTextStyle: {
-      fontSize: 20, // Set the desired font-size
+      fontSize: 20,
     },
     pieHole: 0.4,
     is3D: false,

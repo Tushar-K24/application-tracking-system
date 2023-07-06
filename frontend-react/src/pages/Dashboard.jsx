@@ -1,8 +1,11 @@
 import { Text } from "@mantine/core";
 import DisplayCard from "../dashboard/charts/DisplayCard/DisplayCard";
 import "./Dashboard.css";
+import baseUrl from "../config";
 import DonutChart from "../dashboard/charts/DonutChart/DonutChart";
 import ColumnChart from "../dashboard/charts/ColumnChart/ColumnChart";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../contexts/authContext";
 
 function nFormatter(num, digits) {
   const lookup = [
@@ -27,11 +30,38 @@ function nFormatter(num, digits) {
 }
 
 function Dashboard() {
-  const jobPostings = 12;
-  const totalApplicants = 1216;
+  const [globalData, setGlobalData] = useState({});
+  const [dailyData, setDailyData] = useState({});
+  const { currentUser } = useContext(AuthContext);
 
-  const dailyJobPostings = 5;
-  const dailyApplicants = 52;
+  useEffect(() => {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch(
+      `${baseUrl}/organization/${currentUser._id}/analysis?daily=0`,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        const resJSON = JSON.parse(result);
+        setGlobalData(resJSON.data);
+      })
+      .catch((error) => console.log("error", error));
+
+    fetch(
+      `${baseUrl}/organization/${currentUser._id}/analysis?daily=1`,
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => {
+        const resJSON = JSON.parse(result);
+        setDailyData(resJSON.data);
+      })
+      .catch((error) => console.log("error", error));
+  }, []);
 
   return (
     <div className="dashboard-container">
@@ -43,7 +73,7 @@ function Dashboard() {
             title="Total Job Postings"
             content={
               <Text mt="xs" size="3rem">
-                {jobPostings}
+                {globalData.totalPostings ? globalData.totalPostings : "-"}
               </Text>
             }
           />
@@ -51,7 +81,9 @@ function Dashboard() {
             title="Total Applicants"
             content={
               <Text mt="xs" size="3rem">
-                {nFormatter(totalApplicants, 1)}
+                {globalData.totalApplicants
+                  ? nFormatter(globalData.totalApplicants, 1)
+                  : "-"}
               </Text>
             }
           />
@@ -61,7 +93,7 @@ function Dashboard() {
             title="Today's Job Postings"
             content={
               <Text mt="xs" size="3rem">
-                {dailyJobPostings}
+                {dailyData.totalPostings ? dailyData.totalPostings : "-"}
               </Text>
             }
           />
@@ -69,16 +101,21 @@ function Dashboard() {
             title="Today's Applicants"
             content={
               <Text mt="xs" size="3rem">
-                {nFormatter(dailyApplicants, 1)}
+                {dailyData.totalApplicants
+                  ? nFormatter(dailyData.totalApplicants, 1)
+                  : "-"}
               </Text>
             }
           />
         </div>
-        <DonutChart title="Applicant's Distribution" />
+        <DonutChart
+          title="Applicant's Distribution"
+          jsonData={globalData.applications}
+        />
       </div>
       <h2>Job Postings Distribution</h2>
       <div className="dashboard-content content-row-2">
-        <ColumnChart />
+        <ColumnChart jsonData={globalData.applications} />
       </div>
     </div>
   );
