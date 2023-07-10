@@ -2,7 +2,7 @@ const Job = require("../../models/jobModel");
 
 const getAllJobs = async (req, res) => {
   try {
-    const jobs = await Job.find();
+    const jobs = await Job.find().populate("organization", { name: 1 });
     res.status(200).json({ message: "Jobs found", jobs });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -12,7 +12,9 @@ const getAllJobs = async (req, res) => {
 const getJob = async (req, res) => {
   try {
     const { jobID } = req.params;
-    const job = await Job.findOne({ _id: jobID });
+    const job = await Job.findOne({ _id: jobID }).populate("organization", {
+      name: 1,
+    });
     if (job) {
       res.status(200).json({ message: "Job found", job });
     } else {

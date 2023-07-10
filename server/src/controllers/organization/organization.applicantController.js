@@ -57,8 +57,6 @@ const updateApplicantStatus = async (req, res) => {
     )
       .populate("applicant", { password: 0 })
       .populate("job");
-
-    console.log(updatedApplication);
     const organization = await Organization.findOne(
       { _id: organizationID },
       { name: 1 }

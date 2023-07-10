@@ -6,6 +6,10 @@ const jobSchema = new mongoose.Schema({
     ref: "Organization",
     required: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
   role: {
     type: String,
     required: true,

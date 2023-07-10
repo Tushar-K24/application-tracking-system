@@ -6,7 +6,13 @@ const getAllAppliedJobs = async (req, res) => {
     const { applicantID } = req.params;
     const applications = await Application.find({
       applicant: applicantID,
-    }).populate("job");
+    }).populate({
+      path: "job",
+      populate: {
+        path: "organization",
+        select: "name",
+      },
+    });
     res.status(200).json({ message: "User found", applications: applications });
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -36,12 +42,20 @@ const applyNewJob = async (req, res) => {
     //check if job exists
     const job = await Job.findOne({ _id: jobID });
     if (job) {
-      const newApplication = new Application({
-        applicant: applicantID,
+      const applicationExists = await Application.find({
         job: jobID,
-      });
-      await newApplication.save();
-      res.status(201).json({ message: "Job Added Successfully" });
+        applicant: applicantID,
+      }).count();
+      if (applicationExists) {
+        res.status(405).json({ message: "Already applied" });
+      } else {
+        const newApplication = new Application({
+          applicant: applicantID,
+          job: jobID,
+        });
+        await newApplication.save();
+        res.status(201).json({ message: "Job Added Successfully" });
+      }
     } else {
       res.status(404).json({ message: "Job does not exist" });
     }

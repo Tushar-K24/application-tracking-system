@@ -10,6 +10,7 @@ const applicantQueryRouter = require("../routers/applicant/applicant.queryRouter
 const applicantJobRouter = require("../routers/applicant/applicant.jobRouter");
 
 const jobRouter = require("../routers/commons/jobRouter");
+const dashboardRouter = require("../routers/commons/dashboardRouter");
 
 const router = express.Router();
 
@@ -24,4 +25,9 @@ router.use("/applicant/auth", applicantAuthRouter);
 router.use("/applicant", applicantQueryRouter);
 router.use("/applicant", applicantJobRouter);
 
+router.use("/organization", dashboardRouter);
 module.exports = router;
+
+//TODO:
+//add joi validations on requests
+//nginx
