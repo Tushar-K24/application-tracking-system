@@ -1,5 +1,6 @@
 const Organization = require("../../models/organizationModel");
 const Job = require("../../models/jobModel");
+const Application = require("../../models/applicationModel");
 
 const createJobPosting = async (req, res) => {
   try {
@@ -74,19 +75,19 @@ const updateJob = async (req, res) => {
 const deleteJob = async (req, res) => {
   try {
     const { jobID, organizationID } = req.params;
-    // const updatedJob = await Job.findOneAndUpdate(
-    //   { _id: jobID },
-    //   {
-    //     $set: { status: "closed" },
-    //   },
-    //   { new: true }
-    // );
-    // if (updatedJob) {
-    //   res.status(200).json({ message: "Job status changed to closed" });
-    // } else {
-    //   res.status(404).json({ message: "Job not found" });
-    // }
-    await Job.findOneAndDelete({ _id: jobID });
+    const updatedJob = await Job.findOneAndUpdate(
+      { _id: jobID },
+      {
+        $set: { status: "Closed" },
+      },
+      { new: true }
+    );
+    if (updatedJob) {
+      res.status(200).json({ message: "Job status changed to closed" });
+    } else {
+      res.status(404).json({ message: "Job not found" });
+    }
+    // await Job.findOneAndDelete({ _id: jobID });
     res.status(200).json({ message: "Job deleted successfully" });
   } catch (err) {
     res.status(400).json({ message: err.message });
