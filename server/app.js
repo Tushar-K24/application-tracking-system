@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
 const PORT = process.env.PORT || 3000;
 
 const apiV1 = require("./src/api/apiV1");
