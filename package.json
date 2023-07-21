@@ -1,24 +1,27 @@
 {
   "name": "application-tracking-system",
   "version": "1.0.0",
-  "description": "an app for tracking hiring applications",
-  "main": "app.js",
+  "description": "application tracking system",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install-server": "npm install --prefix server",
+    "install-client": "npm install --prefix frontend-react",
+    "install": "npm run install-server && npm run install-client",
+    "server": "npm run watch --prefix server",
+    "client": "npm run start --prefix frontend-react",
+    "watch": "npm run server & npm run client",
+    "deploy": "npm run build --prefix frontend-react && npm start --prefix server",
+    "test": "npm run test --prefix server && npm run test --prefix frontend-react",
+    "deploy-cluster": "npm run build --prefix frontend-react && npm run cluster --prefix server"
   },
-  "author": "Tushar Khanduri",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tushar-K24/application-tracking-system.git"
+  },
+  "author": "Tushar",
   "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.1.0",
-    "body-parser": "^1.20.2",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.1.4",
-    "email-validator": "^2.0.4",
-    "express": "^4.18.2",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.2.2",
-    "nodemailer": "^6.9.3",
-    "nodemailer-express-handlebars": "^6.1.0"
-  }
+  "bugs": {
+    "url": "https://github.com/Tushar-K24/application-tracking-system/issues"
+  },
+  "homepage": "https://github.com/Tushar-K24/application-tracking-system#readme"
 }

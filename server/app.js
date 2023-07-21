@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const PORT = process.env.PORT || 3000;
 
 const apiV1 = require("./src/api/apiV1");
 
@@ -16,7 +17,7 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/atsDB", {
+  .connect(`${process.env.DB_CONNECTION_STRING}/atsDB`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // useCreateIndex: true,
@@ -32,6 +33,6 @@ mongoose.set("debug", true);
 
 app.use("/api/v1", apiV1);
 
-app.listen(3000, () => {
-  console.log("server started at port 3000");
+app.listen(PORT, () => {
+  console.log(`server started at port ${PORT}`);
 });
