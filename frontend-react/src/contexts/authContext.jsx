@@ -31,6 +31,7 @@ const AuthContextProvider = ({ children }) => {
         .then((response) => response.text())
         .then((result) => {
           const jsonRes = JSON.parse(result);
+          console.log(jsonRes);
           if (jsonRes.user) {
             setCurrentUser(JSON.parse(result).user.user);
           }

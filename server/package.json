@@ -4,6 +4,8 @@
   "description": "an app for tracking hiring applications",
   "main": "app.js",
   "scripts": {
+    "start": "PORT=3024 && node app.js",
+    "cluster": "pm2 start app.js -i max",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tushar Khanduri",
@@ -19,6 +21,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.2.2",
     "nodemailer": "^6.9.3",
-    "nodemailer-express-handlebars": "^6.1.0"
+    "nodemailer-express-handlebars": "^6.1.0",
+    "path": "^0.12.7",
+    "pm2": "^5.3.0"
   }
 }

@@ -8,7 +8,6 @@ function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [universityName, setUniversityName] = useState("");
   const [message, setMessage] = useState("");
   const [isSignedUp, setIsSignedUp] = useState(false);
 
@@ -75,14 +74,6 @@ function Signup() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-          />
-          <input
-            type="text"
-            id="university"
-            name="university"
-            value={universityName}
-            onChange={(e) => setUniversityName(e.target.value)}
-            placeholder="University Name"
           />
           <button type="submit">Sign Up</button>
         </form>

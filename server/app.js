@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const path = require("path");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
@@ -16,6 +17,8 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, "public")));
 
 mongoose
   .connect(`${process.env.DB_CONNECTION_STRING}/atsDB`, {
@@ -33,6 +36,10 @@ mongoose
 mongoose.set("debug", true);
 
 app.use("/api/v1", apiV1);
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`server started at port ${PORT}`);
