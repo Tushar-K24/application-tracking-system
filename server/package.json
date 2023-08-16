@@ -4,7 +4,7 @@
   "description": "an app for tracking hiring applications",
   "main": "app.js",
   "scripts": {
-    "start": "PORT=3024 && node app.js",
+    "start": "node app.js",
     "cluster": "pm2 start app.js -i max",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
